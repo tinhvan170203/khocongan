@@ -13,6 +13,9 @@ var clientRouter = require('./routes/client');
 
 
 var app = express();
+app.listen(3000, ()=> {
+    console.log("123123")
+})
 
 // const url = 'mongodb://localhost:27017/khoPH10';
 const url = 'mongodb+srv://Vuvantinh1:Vuvantinh1@cluster0.pmxuoc2.mongodb.net/?retryWrites=true&w=majority';
@@ -65,4 +68,4 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-module.exports = app;
+// module.exports = app;
