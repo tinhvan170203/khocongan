@@ -17,8 +17,9 @@ app.listen(port, ()=> {
     console.log("123123")
 })
 
-const url = 'mongodb://localhost:27017/khoPH10';
-// const url = 'mongodb+srv://Vuvantinh1:Vuvantinh1@cluster0.pmxuoc2.mongodb.net/?retryWrites=true&w=majority';
+// const url = 'mongodb://localhost:27017/khoPH10';
+const url = 'mongodb+srv://Vuvantinh1:Vuvantinh1@cluster0.pmxuoc2.mongodb.net/?retryWrites=true&w=majority';
+mongoose.set('strictQuery', false)
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
     if (err) throw err;
     console.log('Kết nối CSDL thành công');
