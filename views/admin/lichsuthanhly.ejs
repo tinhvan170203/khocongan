@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Phần mềm quản lý kho vật tư PH10-CA Hưng Yên
+    </title>
+    <link ref="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrapbundle.min.js"></script>
+    <link rel="stylesheet" href="/toast.css">
+    <link rel="stylesheet" href="/fontawesome.css" />
+    <link rel="stylesheet" href="/select.dataTable.min.css" />
+    <link rel='stylesheet' href='/jquery.dataTable.min.css' />
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+    <link rel="stylesheet" href="/animate.min.css" />
+</head>
+
+<body>
+
+    <div class="container-fluid">
+          <!-- Modal add phòng, huyện, thị -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                                    <img alt="thungrac" src="/thungrac.jpg" class="img-delete"/>
+                                    <p class="xacnhan">Xác nhận chắc chắn muốn xóa lần thanh lý này trong cơ sở dữ liệu không?</p>
+                                    <div class="action-button">
+                                        <button class="btn btn-danger close" data-bs-dismiss="modal" aria-label="Close"><i class="far fa-window-close"></i> Hủy</button>
+                                        <button class="btn btn-success" id="confirm"><i class="fas fa-check"></i> Đồng ý</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End modal  -->
+        <div class="row">
+            <div class="col-md-3 col-lg-2 col-xs-12" id="menu">
+                <div class="menu-head">
+                    <img alt="logo" class="menu-head-huyhieu" src="/anh2.png" >
+                    <h3 class="menu-head-name">Phòng Hậu cần - PH10</h3>
+                </div>
+                <div class="menu-main">
+                    <ul class="menu-main-list">
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/tai-khoan">
+                                <i class="fas fa-user-tie menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Quản lý tài khoản</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/don-vi">
+                                <i class="fas fa-home menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Quản lý đơn vị</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/don-vi-truc-thuoc">
+                                <i class="fas fa-home menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Quản lý đơn vị trực thuộc</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/nguon-cap">
+                                <i class="fab fa-sourcetree menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Quản lý nguồn cấp</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/kho">
+                                <i class="fas fa-store menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Quản lý loại kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/danh-muc">
+                                <i class="fas fa-desktop menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Danh mục hàng hóa</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/loai-hang-hoa">
+                                <i class="fas fa-procedures menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Loại hàng hóa</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/nhap-kho">
+                                <i class="fas fa-shopping-cart menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhập kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/chuyen-kho">
+                                <i class="fas fa-shopping-cart menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Chuyển kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/xuat-kho">
+                                <i class="fas fa-shipping-fast menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Xuất kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/thu-hoi">
+                                <i class="fas fa-sync menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Thu hồi</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/thanh-ly">
+                                <i class="fas fa-trash menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Thanh lý</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/lich-su-nhap-kho">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký nhập kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/lich-su-chuyen-kho">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký chuyển kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/lich-su-xuat-kho">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký xuất kho</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/quan-tri/<%=user._id%>/lich-su-thu-hoi">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký thu hồi</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item active">
+                            <a href="/quan-tri/<%=user._id%>/lich-su-thanh-ly">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký thanh lý</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="/trangchu">
+                                <i class="far fa-chart-bar menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Khai thác phần mềm</span>
+                            </a>
+                        </li>
+                        <li class="menu-main-item">
+                            <a href="#" id="logout">
+                                <i class="fas fa-sign-out-alt menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Đăng xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-lg-10 col-xs-12" id="main">
+                <div class="main-top" id="<%=user._id%>">
+                    <div class="main-top-left">
+                        <i class="fas fa-bars main-top-left-icon"></i>
+                        <p class="main-top-left-title">Phần mềm quản lý kho vật tư Công an tỉnh Hưng Yên</p>
+                    </div>
+                    <div class="main-top-right">
+                        <i class="far fa-user main-top-right-icon"></i>
+                        <p class="main-top-right-user">Hello <span style="font-weight: bold;"><%=user.tenhienthi%></span></p>
+                    </div>
+                </div>
+                <div class="main-content-center">
+                    <h3 class="main-content-title">Lịch sử thanh lý hàng hóa</h3>        
+                    <form id="addForm" class="row">  
+                        <div class="form-group mb-3 col-md-4 col-xl-4">
+                            <label class="form-label">Cán bộ PH10 thanh lý: </label>
+                            <input type="text" id="canbothanhly" name="canbothanhly" class="form-control"/>
+                        </div>
+                        <div class="form-group mb-3 col-md-8 col-xl-8">
+                            <label class="form-label">Ghi chú: </label>
+                            <input type="text" id="ghichu" name="ghichu" class="form-control"/>
+                        </div>
+                        <div class="form-group mb-3 col-xl-4 col-md-4 col-sm-12">
+                              <label class="form-label">Từ ngày:</label>
+                              <input class="form-control" id="tungay" name="tungay" type="date" value="<%=today%>" max="<%=today%>" />
+                        </div>
+                        <div class="form-group mb-3 col-xl-4 col-md-4 col-sm-12">
+                              <label class="form-label">Đến ngày:</label>
+                              <input class="form-control" id="denngay" name="denngay" type="date" value="<%=today%>" max="<%=today%>" />
+                        </div>
+                        <div class="form-group mb-3 col-xl-4 col-md-4 col-sm-12">
+                              <label class="form-label">Tra cứu: </label>
+                              <button type="submit" style="width: 100%" class="btn btn-primary add">
+                                    <i class="fas fa-search"></i>Tìm kiếm
+                              </button>
+                        </div>
+                  </form>
+                     <div class="spinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <strong>Loading...</strong>
+                    </div>
+                    <div class="main-table">
+                        <h3 class="total-search">Tổng số: <span id="total"></span> lần thanh lý hàng hóa.</h3>
+                        <table class="table table-striped table-hover" id="table" style="width: 100%">
+                            <thead>
+                                <th style="text-align:center">STT</th>
+                                <th style="text-align:center">Thời gian</th>
+                                <th style="text-align:center">Cán bộ PH10 thanh lý</th>
+                                <th style="text-align:center">Ghi chú</th>
+                                <th style="text-align:center">Thao tác</th>
+                                </thead>
+                                <tbody id="bang2"></tbody>
+                        </table>
+                        <nav aria-label="Page navigation example" id="pagination2"></nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="/3.6.0.jquery.js"></script>
+    <script src="/jquery.dataTable.min.js"></script>
+    <script src="/rowGroup.dataTable.min.js"></script>
+    <script src="/select.dataTable.min.js"></script>
+    <script type="text/javascript" src="/toast.js"></script>
+    <script src="/axios.min.js"></script>
+    <script src="/datatables.editor.js"></script>
+    <script src="/javascripts/admin/lichsuthanhly.js"></script>
+    <script src="/javascripts/admin/logout.js"></script>
+</body>
+
+</html>

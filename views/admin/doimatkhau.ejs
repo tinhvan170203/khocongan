@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Đổi mật khẩu phần mềm Gửi nhận Văn bản
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrapbundle.min.js"></script>
+    <link rel="stylesheet" href="/toast.css">
+    <link rel="stylesheet" href="/fontawesome.css" />
+    <link rel="stylesheet" href="/select.dataTable.min.css" />
+    <link rel='stylesheet' href='/jquery.dataTable.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/animate.min.css" />
+</head>
+<style>
+      .wrapper{
+            background-image: url('/background.png');
+            background-position: center; 
+            object-fit: cover;
+            background-repeat: no-repeat;
+            background-size: cover;
+             background-attachment: fixed;
+      }
+      .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+      }
+      #loginForm{
+            background: #ffffffd9;
+            width: 400px;
+            padding: 24px;
+            border-radius: 4px;
+            box-shadow: 0 0 1px 2px #bdbdbd;
+      }
+      .logo{
+            display: block;
+            width: 100px;
+            margin: 0 auto;
+      }
+      .title-form{
+            text-align: center;
+            font-weight: 600;   
+             text-shadow: 1px 0px 0px #c3bfbf;
+            color: #fb6900;
+      }
+      .btn-login{
+            width: 100%;
+            display: block;
+            margin-top: 12px;
+      }
+      .require{
+            font-size: 16px;
+            color: black;
+      }
+      .message {
+        position: fixed;
+        z-index: 200;
+        border: none;
+        top: 0;
+        color: #030303;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 1px 1px 2px #888;
+    }
+    
+    .close {
+        border: 1px solid white;
+    }
+</style>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row wrapper">
+
+            <% if(typeof message != 'undefined' && message.length > 0){%>
+                  <div class="alert alert-warning alert-dismissible fade show message" role="alert">
+                      <div>
+                          <i class="fas fa-exclamation-triangle"></i>
+                          <%-message %>
+                      </div>
+                      <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+                  </div>
+            <% } %>
+
+            <form id="loginForm">
+                  <div class="form-header">
+                        <img alt="huyhieu" src="/anh2.png" class="logo"/>
+                        <p class="title-form">Đổi mật khẩu tài khoản phần mềm quản lý kho <br>Công an tỉnh Hưng Yên
+                        </p>
+                        <hr>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Tên tài khoản</label>
+                    <input type="text" name="tentaikhoan" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Mật khẩu cũ</label>
+                    <input type="password" class="form-control" name="matkhaucu" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Mật khẩu mới</label>
+                    <input type="password" class="form-control" name="matkhaumoi" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-login">Đổi mật khẩu</button>
+                  <a style="margin-top: 8px;display: block;text-align: end;" href="/quan-tri/login">Quay lại trang đăng nhập</a>
+                </form>
+        </div>
+    </div>
+    <script src="/3.6.0.jquery.js"></script>
+    <script type="text/javascript" src="/toast.js"></script>
+    <script src="/axios.min.js"></script>
+    <script src="/javascripts/doimatkhau.js"></script>
+</body>
+
+</html>

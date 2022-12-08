@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Phần mềm quản lý kho vật tư PH10-CA Hưng Yên
+    </title>
+    <link ref="shortcut icon" type="image/png" href="/anh2.png" />
+    <!-- <link ref="shortcut icon" type="image/png" href="http://abctech.vn/wp-content/uploads/2017/06/logo-nen-xanh.jpg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrapbundle.min.js"></script>
+    <link rel="stylesheet" href="/toast.css">
+    <link rel="stylesheet" href="/fontawesome.css" />
+    <link rel='stylesheet' href='/jquery.dataTable.min.css' />
+    <link rel='stylesheet' href='/stylesheets/client.css' />
+    <link rel="stylesheet" href="/animate.min.css" />
+</head>
+
+<body>
+
+    <div class="container-fluid">
+       
+        <div class="row">
+            <div class="col-md-3 col-lg-2 col-xs-12" id="menu">
+                <div class="menu-head">
+                    <img alt="logo" class="menu-head-huyhieu" src="/anh2.png" >
+                    <h3 class="menu-head-name">Công an tỉnh Hưng Yên</h3>
+                </div>
+                <div class="menu-main">
+                    <ul class="menu-main-list">
+                        <li class="menu-main-item">
+                            <a href="/trangchu">
+                                <i class="fas fa-home menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Trang chủ</span>
+                            </a>
+                        </li>             
+                        <li class="menu-main-item">
+                            <a href="/danh-muc-hang-hoa">
+                                <i class="fas fa-desktop menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Danh mục hàng hóa</span>
+                            </a>
+                        </li>             
+                        <li class="menu-main-item">
+                            <a href="/loai-hang-hoa">
+                                <i class="fas fa-bezier-curve menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Loại hàng hóa</span>
+                            </a>
+                        </li>             
+                        <li class="menu-main-item">
+                            <a data-bs-toggle="collapse" href="#hethongkho" role="button" aria-expanded="false" aria-controls="hethongkho">
+                                <i class="fas fa-star menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Hệ thống kho</span>
+                                <i class="fas fa-angle-down menu-main-item-icon-right"></i>
+                            </a>
+                            <div class="collapse" id="hethongkho">
+                                <ul class="sub-menu-list">
+                                    <%if(khoList.length>0){
+                                        khoList.forEach(i=>{%>
+                                            <li class="sub-menu-item">
+                                                <a href="/kho/<%=i._id%>">
+                                                    <i class="fas fa-warehouse sub-menu-item-icon"></i>
+                                                    <span class="sub-menu-item-title"><%=i.tenkho%></span>
+                                                </a>
+                                            </li>
+                                       <% })
+                                    }%>
+                                </ul>
+                            </div>
+                        </li>                             
+                        <li class="menu-main-item">
+                            <a data-bs-toggle="collapse" href="#nhatky" role="button" aria-expanded="false" aria-controls="nhatky">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký hệ thống</span>
+                                <i class="fas fa-angle-down menu-main-item-icon-right"></i>
+                            </a>
+                            <div class="collapse" id="nhatky">
+                                <ul class="sub-menu-list">
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-nhap-kho">
+                                            <i class="fas fa-shopping-cart sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Nhập kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-xuat-kho">
+                                            <i class="fas fa-shipping-fast sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Xuất kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-chuyen-kho">
+                                            <i class="fas fa-truck-loading sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Chuyển kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-thu-hoi">
+                                            <i class="fas fa-sync sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Thu hồi</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-thanh-ly">
+                                            <i class="fas fa-trash sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Thanh lý</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>                             
+                        <li class="menu-main-item">
+                            <a data-bs-toggle="collapse" href="#thongke" role="button" aria-expanded="false" aria-controls="thongke">
+                                <i class="far fa-chart-bar menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Thống kê, báo cáo</span>
+                                <i class="fas fa-angle-down menu-main-item-icon-right"></i>
+                            </a>
+                            <div class="collapse" id="thongke">
+                                <ul class="sub-menu-list">
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-tong-hop">
+                                            <i class="fab fa-shopify sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Thống kê tổng hợp</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-trong-kho">
+                                            <i class="fas fa-shopping-cart sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa trong kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-nhap-kho">
+                                            <i class="fas fa-shopping-cart sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa nhập kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-xuat-kho">
+                                            <i class="fas fa-shipping-fast sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa xuất kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-thu-hoi">
+                                            <i class="fas fa-sync sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa thu hồi</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-thanh-ly">
+                                            <i class="fas fa-trash sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa thanh lý</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>                
+                        <li class="menu-main-item active">
+                            <a href="/tra-cuu-hang-hoa">
+                                <i class="fas fa-search  menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Tra cứu hàng hóa, <br>vật tư theo số serial</span>
+                            </a>
+                        </li>                                
+                        <li class="menu-main-item">
+                            <a href="#" id="logout">
+                                <i class="fas fa-sign-out-alt  menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Đăng xuất</span>
+                            </a>
+                        </li>                                
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 col-lg-10 col-xs-12" id="main">
+                <div class="main-top" id="<%=user._id%>">
+                    <div class="main-top-left">
+                        <i class="fas fa-bars main-top-left-icon"></i>
+                        <p class="main-top-left-title">Phần mềm quản lý kho vật tư Công an tỉnh Hưng Yên</p>
+                    </div>
+                    <div class="main-top-right">
+                        <i class="far fa-user main-top-right-icon"></i>
+                        <p class="main-top-right-user">Hello, <span style="font-weight: bold;"><%=user.tenhienthi%></span></p>
+                    </div>
+                </div>
+                <div class="main-center-body">
+                    <div class="main-center-body-top animate__animated animate__fadeInUp">
+                        <i class="fas fa-th-large main-center-body-icon"></i>
+                        <p class="main-center-body-title">Tra cứu hàng hóa, vật tư có số Serial</p>
+                    </div>
+
+                    <div class="main-center-body-form">
+                        <form id="searchForm" class="form row">
+                            <div class="form-group mb-3 col-xl-2 col-md-2 col-sm-12">
+                                <label class="form-label">Nguồn cấp:</label>
+                                <select class="form-select" id="nguoncap" name="nguoncap">
+                                  <option value=""> -- Tất cả -- </option>
+                                  <% if(nguoncapList.length > 0) {
+                                      nguoncapList.forEach(nguoncap=>{ %>
+                                          <option value="<%=nguoncap._id%>"><%=nguoncap.tennguoncap%></option>
+                                      <%})
+                                  }%>
+                              </select> 
+                            </div>
+                            <div class="form-group mb-3 col-xl-2 col-md-2 col-sm-12">
+                                <label class="form-label">Danh mục:</label>
+                                <select class="form-select" id="danhmuc" name="danhmuc">
+                                  <option value=""> -- Tất cả -- </option>
+                                  <% if(danhmucList.length > 0) {
+                                      danhmucList.forEach(danhmuc=>{ %>
+                                          <option value="<%=danhmuc._id%>"><%=danhmuc.tendanhmuc%></option>
+                                      <%})
+                                  }%>
+                              </select> 
+                            </div>
+                            <div class="form-group mb-3 col-xl-3 col-md-3 col-sm-12">
+                                <label class="form-label">Loại hàng hóa, vật tư:</label>
+                                <select class="form-select" id="loaihanghoa" name="loaihanghoa">
+                                  <option value=""> -- Tất cả -- </option>
+                                  <% if(loaihanghoaList.length > 0) {
+                                      loaihanghoaList.forEach(loaihanghoa=>{ %>
+                                          <option value="<%=loaihanghoa._id%>"><%=loaihanghoa.tenloaihanghoa%></option>
+                                      <%})
+                                  }%>
+                              </select> 
+                            </div>
+                            <div class="form-group mb-3 col-xl-3 col-md-3 col-sm-12">
+                                <label class="form-label">Số Serial</label>
+                                <input class="form-control" name="mark">
+                            </div>
+                            <div class="form-group mb-3 col-xl-2 col-md-2 col-sm-12">
+                                <label class="form-label">Tra cứu: </label>
+                                <button type="submit" class="btn btn-primary add">
+                                    <i class="fas fa-search"></i> Tìm kiếm
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="spinner">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Đang tải dữ liệu, vui lòng đợi...</span>
+                        </div>
+                        <strong>Đang tải dữ liệu, vui lòng đợi...</strong>
+                    </div>
+
+                    <div class="main-center-body-table">
+                        <p class="table-length"><i class="far fa-comment-alt"></i> Tổng số: <span class="soluong"></span> hàng hóa, vật tư có kết quả phù hợp.</p>
+                        <h3 class="table-title">Danh sách hàng hóa, vật tư được tìm thấy trong Cơ sở dữ liệu hệ thống <span id="table-sub-title"></span>
+                        </h3>
+                        <table id="table" class="table table-stripped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;width: 20px">STT</th>
+                                    <th style="text-align: center">Loại hàng hóa</th>
+                                    <th style="text-align: center">Nguồn cấp</th>
+                                    <th style="text-align: center">Serial Number</th>
+                                    <th style="text-align: center">Trạng thái hiện tại</th>
+                                    <th style="text-align: center">Lịch sử hàng hóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="/3.6.0.jquery.js"></script>
+    <script src="/jquery.dataTable.min.js"></script>
+    <script type="text/javascript" src="/toast.js"></script>
+    <script src="/axios.min.js"></script>
+    <script src="/javascripts/admin/logout.js"></script>
+    <script src="/dataTables.buttons.min.js"></script>
+    <script src="/jszip.min.js"></script>
+    <script src="/buttons.html5.min.js"></script>
+    <script>
+        $(document).ready(async()=> {
+
+            const searchLichsu = async (data) => {
+                try {
+                let res = await axios.get(`/tra-cuu-hang-hoa/search`, {
+                    params: data,
+                });     
+                return res
+                } catch (error) {
+                console.log(error.message);
+                }
+            };
+
+            $("#searchForm").on("submit", async (e) => {
+                e.preventDefault();
+                $('.spinner').addClass('visiable');
+                $('.spinner').fadeIn(); 
+                $('#table-body').html('');
+                $("#table").DataTable().clear();
+                $("#table").DataTable().destroy();
+                let formData = new FormData(e.target);
+                const json = JSON.stringify(Object.fromEntries(formData));
+                const data = JSON.parse(json);
+                let res = await searchLichsu(data);
+        
+                $('.soluong').html(`${res.data.length}`);
+                if(res && res.data.length > 0){
+                    res.data.forEach((item,index)=>{
+                        let status = null;
+                        if(item.trangthai === "Trong kho"){
+                            status = 'trongkho'
+                        };
+                        if(item.trangthai === "Đã xuất kho"){
+                            status = 'xuatkho'
+                        };
+                        if(item.trangthai === "Đã thanh lý"){
+                            status = 'thanhly'
+                        };
+                $("#table-body").append(`
+                                    <tr>
+                                        <td style="font-weight:bold;text-align: center">${index + 1}</td>
+                                        <td style="font-weight:bold;">${item.loaihanghoa}</td>
+                                        <td style="text-align: center;">${item.nguoncap}</td>
+                                        <td style="text-align: center;">${item.mark}</td>
+                                        <td style="font-weight:bold;text-align: center;"><p class="status ${status}">${item.trangthai}<p></td>
+                                            <td><a href="/tra-cuu-hang-hoa/chi-tiet/${item._id}"><button style="display: block;margin: 0 auto;padding: 0px 24px"  class="btn btn-success btn-sm"><i class="fas fa-info"></i> Chi tiết</button></a></td>
+                                    </tr>
+                            `);
+                    })
+                };
+
+                $(document).on('mousedown', '#exportButton', function(e) {
+                    let value = $('.table-title').text();  
+                    if (value.trim().length > 0)
+                    $('#exportButton').data('filename', value);  
+                })
+
+
+                 $("#table").DataTable({
+                    lengthMenu: [10],
+                    // searching: false,
+                    language: {
+                    search: "Tìm kiếm",
+                    sInfoEmpty: "",
+                    sEmptyTable: "Không có hàng hóa, vật tư phù hợp trong cơ sở dữ liệu",
+                    sInfoFiltered: "",
+                    sInfo: "",
+                    sLengthMenu: "",
+                    'paginate': {
+                        'previous': '<i class="fas fa-backward"></i>',
+                        'next': '<i class="fas fa-forward"></i>'
+                    }
+                    },
+                    destroy: true, // cho phép hủy bỏ table tạo table mới với cùng id table
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {   
+                    text: '<i class="fas fa-file-excel download-icon"></i> Tải xuống File Excel',
+                    extend: 'excelHtml5',
+                    className: 'btn btn-primary btn-sm',
+                    // autoFilter: true,
+                    attr: {id: 'exportButton'},
+                    sheetName: 'data',
+                    title: function ( ) {
+                        return $('#exportButton').data('filename');
+                    },
+                    filename: function ( ) {
+                        return $('#exportButton').data('filename');
+                    } }] 
+                });
+
+                $('.spinner').removeClass('visiable');
+                $('.spinner').fadeOut();
+             }); 
+
+            const fetchLoaihanghoa = async (id1) => {
+            let res = await axios.get(`/quan-tri/ten-loai-hang-hoa/${id1}/fetch`);
+            return res.data
+            };
+
+            $('#danhmuc').on('change', async function(){
+                let id1 = $(this).val();
+                $('#loaihanghoa').html('');
+                let data;
+                if(id1 !== ''){
+                    data = await fetchLoaihanghoa(id1);
+                }
+                // console.log(data)
+                $('#loaihanghoa').append(`
+                    <option value="">-- Chọn tất cả --</option>
+                `);
+
+                if(data && data.length > 0){
+                    data.forEach(i => {
+                    $('#loaihanghoa').append(`
+                        <option value="${i._id}">${i.tenloaihanghoa}</option>
+                    `)
+                    })
+                }
+                });
+            })
+    </script>
+</body>
+
+
+
+</html>

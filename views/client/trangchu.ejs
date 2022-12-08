@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Phần mềm quản lý kho vật tư PH10-CA Hưng Yên
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link ref="shortcut icon" type="image/png" href="/favicon.png" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrapbundle.min.js"></script>
+    <link rel="stylesheet" href="/toast.css">
+    <link rel="stylesheet" href="/fontawesome.css" />
+    <!-- <link rel="stylesheet" href="/select.dataTable.min.css" /> -->
+    <link rel='stylesheet' href='/jquery.dataTable.min.css' />
+    <!-- <link rel='stylesheet' href='/stylesheets/main.css' /> -->
+    <link rel='stylesheet' href='/stylesheets/client.css' />
+    <link rel="stylesheet" href="/animate.min.css" />
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> -->
+</head>
+
+<body>
+
+    <div class="container-fluid">
+       
+        <div class="row">
+            <div class="col-md-3 col-lg-2 col-xs-12" id="menu">
+                <div class="menu-head">
+                    <img alt="logo" class="menu-head-huyhieu" src="/anh2.png" >
+                    <h3 class="menu-head-name">Công an tỉnh Hưng Yên</h3>
+                </div>
+                <div class="menu-main">
+                    <ul class="menu-main-list">
+                        <li class="menu-main-item active">
+                            <a href="/trangchu">
+                                <i class="fas fa-home menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Trang chủ</span>
+                            </a>
+                        </li>             
+                        <li class="menu-main-item">
+                            <a href="/danh-muc-hang-hoa">
+                                <i class="fas fa-desktop menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Danh mục hàng hóa</span>
+                            </a>
+                        </li>             
+                        <li class="menu-main-item">
+                            <a href="/loai-hang-hoa">
+                                <i class="fas fa-bezier-curve menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Loại hàng hóa</span>
+                            </a>
+                        </li>             
+                        <li class="menu-main-item">
+                            <a data-bs-toggle="collapse" href="#hethongkho" role="button" aria-expanded="false" aria-controls="hethongkho">
+                                <i class="fas fa-star menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Hệ thống kho</span>
+                                <i class="fas fa-angle-down menu-main-item-icon-right"></i>
+                            </a>
+                            <div class="collapse" id="hethongkho">
+                                <ul class="sub-menu-list">
+                                    <%if(khoList.length>0){
+                                        khoList.forEach(i=>{%>
+                                            <li class="sub-menu-item">
+                                                <a href="/kho/<%=i._id%>">
+                                                    <i class="fas fa-warehouse sub-menu-item-icon"></i>
+                                                    <span class="sub-menu-item-title"><%=i.tenkho%></span>
+                                                </a>
+                                            </li>
+                                       <% })
+                                    }%>
+                                </ul>
+                            </div>
+                        </li>                             
+                        <li class="menu-main-item">
+                            <a data-bs-toggle="collapse" href="#nhatky" role="button" aria-expanded="false" aria-controls="nhatky">
+                                <i class="fas fa-history menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Nhật ký hệ thống</span>
+                                <i class="fas fa-angle-down menu-main-item-icon-right"></i>
+                            </a>
+                            <div class="collapse" id="nhatky">
+                                <ul class="sub-menu-list">
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-nhap-kho">
+                                            <i class="fas fa-shopping-cart sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Nhập kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-xuat-kho">
+                                            <i class="fas fa-shipping-fast sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Xuất kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-chuyen-kho">
+                                            <i class="fas fa-truck-loading sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Chuyển kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-thu-hoi">
+                                            <i class="fas fa-sync sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Thu hồi</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/lich-su-thanh-ly">
+                                            <i class="fas fa-trash sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Thanh lý</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>                             
+                        <li class="menu-main-item">
+                            <a data-bs-toggle="collapse" href="#thongke" role="button" aria-expanded="false" aria-controls="thongke">
+                                <i class="far fa-chart-bar menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Thống kê, báo cáo</span>
+                                <i class="fas fa-angle-down menu-main-item-icon-right"></i>
+                            </a>
+                            <div class="collapse" id="thongke">
+                                <ul class="sub-menu-list">
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-tong-hop">
+                                            <i class="fab fa-shopify sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Thống kê tổng hợp</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-trong-kho">
+                                            <i class="fas fa-shopping-cart sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa trong kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-nhap-kho">
+                                            <i class="fas fa-shopping-cart sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa nhập kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-xuat-kho">
+                                            <i class="fas fa-shipping-fast sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa xuất kho</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-thu-hoi">
+                                            <i class="fas fa-sync sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa thu hồi</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a href="/thong-ke-hang-thanh-ly">
+                                            <i class="fas fa-trash sub-menu-item-icon"></i>
+                                            <span class="sub-menu-item-title">Hàng hóa thanh lý</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>                
+                        <li class="menu-main-item">
+                            <a href="/tra-cuu-hang-hoa">
+                                <i class="fas fa-search  menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Tra cứu hàng hóa, <br>vật tư theo số serial</span>
+                            </a>
+                        </li>                                
+                        <li class="menu-main-item">
+                            <a href="#" id="logout">
+                                <i class="fas fa-sign-out-alt  menu-main-item-icon"></i>
+                                <span class="menu-main-item-title">Đăng xuất</span>
+                            </a>
+                        </li>                                
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 col-lg-10 col-xs-12" id="main">
+                <div class="main-top" id="<%=user._id%>">
+                    <div class="main-top-left">
+                        <i class="fas fa-bars main-top-left-icon"></i>
+                        <p class="main-top-left-title">Phần mềm quản lý kho vật tư Công an tỉnh Hưng Yên</p>
+                    </div>
+                    <div class="main-top-right">
+                        <i class="far fa-user main-top-right-icon"></i>
+                        <p class="main-top-right-user">Hello, <span style="font-weight: bold;"><%=user.tenhienthi%></span></p>
+                    </div>
+                </div>
+                <div class="main-center" style="position: relative;height: calc(100vh - 122px);">
+                    <div id="example"></div>
+                    <div class="main-center-tongquan-wrapper">
+                        <h3 class="tongquan-head">
+                            Hệ thống dữ liệu phần mềm:
+                        </h3>
+                        <ul class="tongquan-main">
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số kho hiện có:</span>
+                                <span class="tongquan-item-soluong"><%=khoList.length%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số danh mục hàng hóa, vật tư:</span>
+                                <span class="tongquan-item-soluong"><%=danhmucLength%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số loại hàng hóa, vật tư:</span>
+                                <span class="tongquan-item-soluong"><%=loaihanghoaLength%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số lần nhập kho:</span>
+                                <span class="tongquan-item-soluong"><%=solannhapkho%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số lần xuất kho:</span>
+                                <span class="tongquan-item-soluong"><%=solanxuatkho%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số lần chuyển kho:</span>
+                                <span class="tongquan-item-soluong"><%=solanchuyenkho%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số lần thu hồi hàng hóa, vật tư về kho:</span>
+                                <span class="tongquan-item-soluong"><%=solanthuhoi%></span>
+                            </li>
+                            <li class="tongquan-main-item">
+                                <span class="tongquan-item-title">- Tổng số lần thanh lý hàng hóa, vật tư:</span>
+                                <span class="tongquan-item-soluong"><%=solanthanhly%></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <img src="/anhtrangchu.png" alt="" class="main-center-img">
+                    
+                    <div class="main-footer">
+                        <p class="main-footer-text">
+                            Đơn vị sử dụng: Đội Tổng hợp, quản lý tài sản - Phòng Hậu cần - Công an tỉnh Hưng Yên <br>
+                            @2022 - Bản quyền thuộc đội Công nghệ thông tin - Phòng Tham mưu <br>
+                            Thiết kế và phát triển phần mềm: Vũ Văn Tính</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="/3.6.0.jquery.js"></script>
+    <script src="/jquery.dataTable.min.js"></script>
+    <script type="text/javascript" src="/toast.js"></script>
+    <script type="text/javascript" src="/polygonizr.js"></script>
+    <script type="text/javascript" src="/polygonizr.min.js"></script>
+    <script src="/axios.min.js"></script>
+    <script src="/javascripts/admin/logout.js"></script>
+    <script>
+        $('#example').polygonizr({
+
+// Indicates the time (in seconds) to pause after a node has reached its destination. 
+restNodeMovements: 1,
+
+// Indicates how long (in seconds) it will take for a node to move from start to finish. 
+duration: 1,
+
+// Indicates the maximum (will be randomized) distance a node can move (in pixles) from its starting position. 
+nodeMovementDistance: 100,
+
+// Indicates the maximum (will be randomized) distance a node can have in depth (for a better <a href="https://www.jqueryscript.net/tags.php?/3D/">3D</a> effect). Default: 300
+node3dDepthDistance: 600,
+
+// If set to true, the animation will rotate. Default: false
+node3dRotate: false,
+
+// If node3dRotate is set to true, the following option indicate if rotation should pause between n restNodeMovements. Default: 1
+node3dRotateOnNthNodeMovement: 1,
+
+// If node3dRotate is set to true, the following option indicate the alpha of the nodes at the far end of the rotation, creating depth. Default: 0.1
+node3dRotateDepthAlpha: 0.1,
+
+// If node3dRotate is set to true, the following option indicates the ease mode of each node movement (linear, easeIn, easeOut, easeInOut, accelerateDecelerate). Default: linear
+node3dRotatEase: "linear",
+
+// If node3dRotate is set to true, the following option indicate the axis on the canvas around which the animation will rotate (median, center, left, right). Default: center
+node3dRotateAxis: "center",
+
+// Indicates how many nodes to paint which relation can be filled (note: nodeFillSapce must be set to true). 
+numberOfNodes: 15,
+
+// Indicates how many nodes to paint that does not create relations that can be filled. 
+numberOfUnconnectedNode: 25,
+
+// Indicates if a line should be drawn between the drawn between unconnected nodes. 
+ConnectUnconnectedNodes: true,
+
+// Indicates the maximum distance between unconnected nodes to draw the line.
+ConnectUnconnectedNodesDistance: 250,
+
+// Indicates the maximum painted size of each node's "dot".
+nodeDotSize: 2.5,
+
+// Indicates the ease mode of each node movement (linear, easeIn, easeOut, easeInOut, accelerateDecelerate). 
+nodeEase: "easeOut",
+
+// If true, the nodes starting position will descend into place on load. 
+nodeFancyEntrance: false,
+
+// If true, each nodes starting position will be randomized within the canvas size. If false, each nodes position must be specified manually. 
+randomizePolygonMeshNetworkFormation: true,
+
+// Indicates the positioning of each nodes starting position (note: randomizePolygonMeshNetworkFormation must be set to false).
+specifyPolygonMeshNetworkFormation: null,
+
+// Indicates how many nodes of the "numberOfNodes" that will be connected.
+nodeRelations: 3,
+
+// Indicates the frame rate at which to up<a href="https://www.jqueryscript.net/time-clock/">date</a> each node movement.
+animationFps: 30,
+
+// Indicates the color (RGB) of each node's "dot". 
+nodeDotColor: "200, 200, 200",
+
+// If nodeDotColor is set to an array of colors, this option indicates in what order to pick the colors (linear or random). Default: linear
+nodeDotColoringSchema: "linear",
+
+// Indicates the color (RGB) of the line drawn between connected nodes.
+nodeLineColor: "150, 150, 150",
+
+// If nodeLineColor is set to an array of colors, this option indicates in what order to pick the colors (linear or random). Default: linear
+nodeLineColoringSchema: "linear",
+
+// Indicates the fill color (RGB) between each connected node. 
+nodeFillColor: "100, 100, 100",
+
+// If nodeFillColor is set to an array of colors, this option indicates in what order to pick the colors (linear or random). Default: linear
+nodeFillColoringSchema: "linear",
+
+// Indicates the linear gradient to the fill color (RGB) between each connected node. 
+nodeFillGradientColor: null,
+
+// If nodeFillGradientColor is set to an array of colors, this option indicates in what order to pick the colors (linear or random). Default: linear
+nodeFillGradientColoringSchema: "linear",
+
+// Indicates the fill color's alpha level (1-0).
+nodeFillAlpha: 0.5,
+
+// Indicates the alpha level (1-0) of the line drawn between connected nodes. 
+nodeLineAlpha: 0.5,
+
+// Indicates the alpha level (1-0) of each node's "dot". 
+nodeDotAlpha: 1.0,
+
+// Indicates the probability (1-0) of showing the coordinates for each nodes final position.
+nodeDotPrediction: 0,
+
+// If true, the relation between connected nodes will be filled. 
+nodeFillSapce: true,
+
+// If true, each node's final position can be outside the canvas boundary. 
+nodeOverflow: true,
+
+// If true, a glowing effect is added to each node, its relations and fill respectively.
+nodeGlowing: false,
+
+// Indicates the width of the canvas on which to paint each node. 
+canvasWidth: $(this).width(),
+
+// Indicates the height of the canvas on which to paint each node.
+canvasHeight: $(this).height(),
+
+// Indicate the CSS position property by which to position the canvas.
+canvasPosition: "absolute",
+
+// Indicate the CSS top property by which to vertically position the canvas.
+canvasTop: "auto",
+
+// Indicate the CSS bottom property by which to vertically position the canvas.
+canvasBottom: "auto",
+
+// Indicate the CSS right property by which to horizontally position the canvas.
+canvasRight: "auto",
+
+// Indicate the CSS left property by which to horizontally position the canvas.
+canvasLeft: "auto",
+
+// Indicate the CSS z-index property by which to specify the stack order of the canvas.
+canvasZ: "auto"
+
+});
+    </script>
+
+   
+</body>
+
+
+
+</html>

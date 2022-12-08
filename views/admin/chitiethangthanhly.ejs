@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Phần mềm quản lý kho vật tư PH10-CA Hưng Yên
+    </title>
+    <link ref="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrapbundle.min.js"></script>
+    <link rel="stylesheet" href="/toast.css">
+    <link rel="stylesheet" href="/fontawesome.css" />
+    <link rel="stylesheet" href="/select.dataTable.min.css" />
+    <link rel='stylesheet' href='/jquery.dataTable.min.css' />
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+    <link rel="stylesheet" href="/animate.min.css" />
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-xs-12" id="menu">
+                    <div class="menu-head">
+                        <img alt="logo" class="menu-head-huyhieu" src="/anh2.png" >
+                        <h3 class="menu-head-name">Phòng Hậu cần - PH10</h3>
+                    </div>
+                    <div class="menu-main">
+                        <ul class="menu-main-list">
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/tai-khoan">
+                                    <i class="fas fa-user-tie menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Quản lý tài khoản</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/don-vi">
+                                    <i class="fas fa-home menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Quản lý đơn vị</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/don-vi-truc-thuoc">
+                                    <i class="fas fa-home menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Quản lý đơn vị trực thuộc</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/nguon-cap">
+                                    <i class="fab fa-sourcetree menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Quản lý nguồn cấp</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/kho">
+                                    <i class="fas fa-store menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Quản lý loại kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/danh-muc">
+                                    <i class="fas fa-desktop menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Danh mục hàng hóa</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/loai-hang-hoa">
+                                    <i class="fas fa-procedures menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Loại hàng hóa</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/nhap-kho">
+                                    <i class="fas fa-shopping-cart menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Nhập kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/chuyen-kho">
+                                    <i class="fas fa-shopping-cart menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Chuyển kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/xuat-kho">
+                                    <i class="fas fa-shipping-fast menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Xuất kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/thu-hoi">
+                                    <i class="fas fa-sync menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Thu hồi</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/thanh-ly">
+                                    <i class="fas fa-trash menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Thanh lý</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/lich-su-nhap-kho">
+                                    <i class="fas fa-history menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Nhật ký nhập kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/lich-su-chuyen-kho">
+                                    <i class="fas fa-history menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Nhật ký chuyển kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/lich-su-xuat-kho">
+                                    <i class="fas fa-history menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Nhật ký xuất kho</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/lich-su-thu-hoi">
+                                    <i class="fas fa-history menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Nhật ký thu hồi</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/quan-tri/<%=user._id%>/lich-su-thanh-ly">
+                                    <i class="fas fa-history menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Nhật ký thanh lý</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="/trangchu">
+                                    <i class="far fa-chart-bar menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Khai thác phần mềm</span>
+                                </a>
+                            </li>
+                            <li class="menu-main-item">
+                                <a href="#" id="logout">
+                                    <i class="fas fa-sign-out-alt menu-main-item-icon"></i>
+                                    <span class="menu-main-item-title">Đăng xuất</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            <div class="col-md-9 col-lg-10 col-xs-12" id="main">
+                <div class="main-top" id="<%=user._id%>">
+                    <div class="main-top-left">
+                        <i class="fas fa-bars main-top-left-icon"></i>
+                        <p class="main-top-left-title">Phần mềm quản lý kho vật tư Công an tỉnh Hưng Yên</p>
+                    </div>
+                    <div class="main-top-right">
+                        <i class="far fa-user main-top-right-icon"></i>
+                        <p class="main-top-right-user">Hello <span style="font-weight: bold;"><%=user.tenhienthi%></span></p>
+                    </div>
+                </div>
+                <div class="main-content-center">
+                    <h3 class="main-content-title">Danh mục hàng hóa đã thanh lý</h3>        
+                    <div class="detail-chuyenkho row">
+                        <div class="col-md-6 col-sm-12">
+                            <label class="form-label">Thời gian thanh lý:</label>
+                            <span class="detail-chuyenkho-title"><%=thanhlyHistory.timeNumber.toString().slice(8, 10) + 'h:' +
+                                thanhlyHistory.timeNumber.toString().slice(10, 12) + 'phút ' +
+                                thanhlyHistory.timeNumber.toString().slice(6, 8) + '/' +
+                                thanhlyHistory.timeNumber.toString().slice(4, 6) + '/' +
+                                thanhlyHistory.timeNumber.toString().slice(0, 4)%></span>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label class="form-label">Cán bộ PH10 thanh lý:</label>
+                            <span class="detail-chuyenkho-title"><%=thanhlyHistory.canbothanhly%></span>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label class="form-label">Ghi chú:</label>
+                            <span class="detail-chuyenkho-title"><%=thanhlyHistory.ghichu%></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-table">
+                    <h5 class="main-table-title">Danh sách hàng hóa, vật tư đã thanh lý</h5>
+                    <h3 class="total-search">Tổng số: <span id="total"><%=tongsohangthanhly%></span> hàng hóa đã được thanh lý.</h3>
+                    <table class="table table-hover table-striped" id="table" style="width: 100%">
+                        <thead>
+                            <tr>
+                              <th scope="col" style="text-align: center">STT</th>
+                              <th scope="col" style="text-align: center">Tên hàng hóa</th>
+                              <th scope="col" style="text-align: center">Kho hàng</th>
+                              <th scope="col" style="text-align: center">Serial, size</th>
+                              <th scope="col" style="text-align: center">Nguồn cấp</th>
+                              <th scope="col" style="text-align: center">Số lượng</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <%if(hanghoaNoneSeriThanhly.length > 0){
+                                hanghoaNoneSeriThanhly.forEach((i, index)=>{%>
+                                    <tr>
+                                        <td style="text-align: center"><%=(index + 1)%></td>
+                                        <td style="text-align: center;font-weight: bold;"><%=i.loaihanghoa.tenloaihanghoa%></td>
+                                        <td style="text-align: center"><%=i.kho.tenkho%></td>
+                                        <td style="text-align: center"><%=i.mark%></td>
+                                        <td style="text-align: center"><%=i.nguoncap.tennguoncap%></td>
+                                        <td style="text-align: center; font-weight: bold;"><span style="color: red;"><%=i.thanhlyHistory[0].soluong%></span></td>
+                                    </tr>
+                               <% })
+                            } %>
+                            <%if(hanghoaCoSeriThanhly.length > 0){
+                                hanghoaCoSeriThanhly.forEach((i, index)=>{%>
+                                    <tr>
+                                        <td style="text-align: center"><%= hanghoaNoneSeriThanhly.length + index + 1 %></td>
+                                        <td style="text-align: center;font-weight: bold;"><%=i.loaihanghoa.tenloaihanghoa%></td>
+                                        <td style="text-align: center"><%=i.kho.tenkho%></td>
+                                        <td style="text-align: center"><%=i.mark%></td>
+                                        <td style="text-align: center"><%=i.nguoncap.tennguoncap%></td>
+                                        <td style="text-align: center; font-weight: bold;"><span style="color: red;"><%=i.thanhlyHistory[0].soluong%></span></td>
+                                    </tr>
+                               <% })
+                            } %>
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/3.6.0.jquery.js"></script>
+    <script src="/jquery.dataTable.min.js"></script>
+    <script src="/rowGroup.dataTable.min.js"></script>
+    <script src="/select.dataTable.min.js"></script>
+    <script type="text/javascript" src="/toast.js"></script>
+    <script src="/axios.min.js"></script>
+    <script src="/datatables.editor.js"></script>
+
+    <script src="/javascripts/admin/logout.js"></script>
+    <script>
+        table = $("#table").DataTable({
+        lengthMenu: [10],
+        // searching: false,
+        language: {
+        search: "Tìm kiếm",
+        sInfoEmpty: "",
+        sEmptyTable: "Không có dữ liệu hàng hóa chuyển kho",
+        sInfoFiltered: "",
+        sInfo: "",
+        sLengthMenu: "",
+        },
+        destroy: true, // cho phép hủy bỏ table tạo table mới với cùng id table
+        })
+    </script>
+</body>
+
+
+
+</html>
